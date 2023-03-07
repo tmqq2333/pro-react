@@ -2,10 +2,10 @@ import axios from 'axios';
 import { message } from "antd";
 const isDev = process.env.NODE_ENV === "development";
 var service = axios.create({
-    baseURL: isDev ? '' : '',  //所有的请求都会 带上/api
-    "content-type": "application/json",
-    timeout: 5000
-})
+  baseURL: isDev ? "" : "/pro-react/dist", //所有的请求都会 带上/api
+  "content-type": "application/json",
+  timeout: 5000,
+});
 //请求拦截器
 service.interceptors.request.use(
     //可配置是否需要带上token访问

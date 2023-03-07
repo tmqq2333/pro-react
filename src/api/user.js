@@ -3,13 +3,13 @@ export function getPassword(data) {
   return request({
     method: "GET",
     url: "/data.json",
-    data
+    data,
   });
 }
 export function postPassword(data) {
   return request({
     method: "POST",
     url: "/data.json",
-    data
+    data,
   });
 }

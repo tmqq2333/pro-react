@@ -1,6 +1,5 @@
 import React,{useState} from 'react'
 import HasBtn from "@/components/HasBtn";
-import './scss/look.scss'
 import { Button, Space, DatePicker } from "antd";
 const { RangePicker } = DatePicker;
 export default function Look() {
