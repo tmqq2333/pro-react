@@ -22,7 +22,7 @@ var message = __webpack_require__(5360);
 
 var isDev = "production" === "development";
 var service = axios/* default.create */.Z.create({
-  baseURL: isDev ? '' : '',
+  baseURL: isDev ? "" : "/pro-react/dist",
   //所有的请求都会 带上/api
   "content-type": "application/json",
   timeout: 5000
@@ -119,14 +119,14 @@ function service_request(config) {
 function getPassword(data) {
   return service_request({
     method: "GET",
-    url: "/pro-react/dist/data.json",
+    url: "/data.json",
     data: data
   });
 }
 function postPassword(data) {
   return request({
     method: "POST",
-    url: "/pro-react/dist/data.json",
+    url: "/data.json",
     data: data
   });
 }
