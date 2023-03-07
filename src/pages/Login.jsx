@@ -53,7 +53,7 @@ const Login = () => {
     <div className={style.login}>
       <div className="login_box">
         <div
-          className="box login_pre"
+          className="boxlog login_pre"
           style={{
             transform: [`translateX(${msg.x}%)`],
             backgroundColor: msg.color,
@@ -67,7 +67,7 @@ const Login = () => {
             {msg.msg}
           </span>
         </div>
-        <div className="box  login_box_r">
+        <div className="boxlog  login_box_r">
           <h1>注册</h1>
           <Form
             name="basic"
@@ -155,7 +155,7 @@ const Login = () => {
             </Form.Item>
           </Form>
         </div>
-        <div className="box  login_box_r">
+        <div className="boxlog  login_box_r">
           <h1>登录</h1>
           <Form
             name="basic"
