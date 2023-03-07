@@ -1361,7 +1361,7 @@ module.exports = __webpack_require__.p + "static/images/55375dff1b4a44d84d77.jpg
 /******/ 	
 /******/ 	/* webpack/runtime/publicPath */
 /******/ 	!function() {
-/******/ 		__webpack_require__.p = "/pro-react/dist";
+/******/ 		__webpack_require__.p = "/pro-react/dist/";
 /******/ 	}();
 /******/ 	
 /******/ 	/* webpack/runtime/css loading */
