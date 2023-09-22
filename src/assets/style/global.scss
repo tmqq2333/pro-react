@@ -1,0 +1,22 @@
+
+.username {
+  max-width: 80px;
+  display: block;
+  @include t-overflow;
+}
+// 侧边栏
+//内容页
+main {
+  padding: 20px 20px;
+  display: flex;
+  flex-direction: column;
+}
+.table-list {
+  background-color: rgb(255, 255, 255);
+  height: 100%;
+  overflow-y: auto;
+}
+//抽屉
+.ant-drawer .ant-drawer-title{
+   font-weight: 500;
+}

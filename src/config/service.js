@@ -2,7 +2,7 @@ import axios from 'axios';
 import { message } from "antd";
 const isDev = process.env.NODE_ENV === "development";
 var service = axios.create({
-  baseURL: isDev ? "" : "/pro-react/dist", //所有的请求都会 带上/api
+  baseURL: isDev ? "/api" : "/pro-react/dist", //所有的请求都会 带上/api
   "content-type": "application/json",
   timeout: 5000,
 });
@@ -78,3 +78,20 @@ export default function request(config) {
             return service(config);
     }
 }
+
+// export default function HttpReq(config) {
+//   return new Promise((resolve, reject) => {
+//     request(config)
+//       .then((res) => {
+//         if (res.code === 200) {
+//           resolve(res);
+//         } else {
+//           reject(res);
+//           message.error(res.msg);
+//         }
+//       })
+//       .catch(() => {
+//         reject();
+//       });
+//   });
+// }

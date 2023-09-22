@@ -2,14 +2,21 @@ import request from "@/config/service";
 export function getPassword(data) {
   return request({
     method: "GET",
-    url: "/data.json",
+    url: "/data",
     data,
   });
 }
 export function postPassword(data) {
   return request({
     method: "POST",
-    url: "/data.json",
+    url: "/highSpeedCable/login",
+    data,
+  });
+}
+export function getStops(data) {
+  return request({
+    method: "GET",
+    url: "/highSpeedCable/actualProduction/stops",
     data,
   });
 }

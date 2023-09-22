@@ -1,0 +1,6 @@
+{
+ "editor.codeActionsOnSave": {
+   "source.fixAll.eslint": true
+ }
+}
+//配置每次报错自动 ESLint 检查规则并格式化

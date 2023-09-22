@@ -1,46 +1,72 @@
-import { Button, Checkbox, Form, Input, message } from "antd";
-import React, { useState } from "react";
-import { getPassword } from "@/api/user";
-import { useNavigate } from "react-router-dom";
-import style from "./scss/login.module.scss";
+import { Button, Checkbox, Form, Input, message } from 'antd';
+import React, { useState } from 'react';
+import { getPassword, postPassword } from '@/api/user';
+import { useNavigate } from 'react-router-dom';
+import { Wrapper } from './commpages';
+import { setMenu, setToken, setUserInfo } from '@/utils/auth';
+const bcrypt = require('bcryptjs');
 let loginMsg = [
   {
-    msg: "没有账号?注册",
+    msg: '没有账号?注册',
     x: 0,
-    color: "#3187aa",
-    img: require("../assets/a.jpg"),
+    color: '#3187aa',
+    img: require('../assets/image/a.jpg'),
   },
   {
-    msg: "已注册？登录",
+    msg: '已注册？登录',
     x: 100,
-    color: "#325690",
-    img: require("../assets/b.jpg"),
+    color: '#325690',
+    img: require('../assets/image/b.jpg'),
   },
 ];
 const Login = () => {
   const navigate = useNavigate();
   const [msg, setMsg] = useState(loginMsg[0]);
-  const onFinish = (values) => {
-    getPassword().then((res) => {
-      const fing = res.find((i) => i.password === values.password);
+  const onFinish = async (values) => {
+    // const salt = bcrypt.genSaltSync(10);
+    // const hash = bcrypt.hashSync(values.password, salt);
+    // // const isMatch = bcrypt.compareSync(values.password, hash);
+    // postPassword({ username: values.username, password: hash })
+    //   .then(({ data }) => {
+    //     let v = data[0];
+    //     let info = {
+    //       name: v.name,
+    //       shiftObj: v.shiftNo + '|' + v.shiftGroup,
+    //     };
+    //     setUserInfo(v.name);
+    //     setToken(v.token);
+    //     setMenu(JSON.stringify(v.menu));
+    //     message.success('欢迎登录系统');
+    //     navigate('/');
+    //   })
+    //   .catch(({ msg }) => {
+    //     message.error('用户账号不存在，请重新输入！');
+    //   });
+    try {
+      const { data } = await getPassword(values);
+      const fing = data.find((i) => i.password === values.password);
       if (fing) {
-        localStorage.setItem("username", values.username);
-        localStorage.setItem("token", fing.token);
-        localStorage.setItem("meun", fing.meun);
-        message.success("欢迎登录系统");
-        navigate("/");
+        setUserInfo(values.username);
+        setToken(fing.token);
+        console.log('fing.menu', JSON.stringify(fing.menu));
+
+        setMenu(JSON.stringify(fing.menu));
+        message.success('欢迎登录系统');
+        navigate('/');
       } else {
-        message.error("密码或用户名错误！");
+        message.error('用户账号不存在，请重新输入！');
       }
-    });
+    } catch (error) {
+      message.error('用户账号不存在，请重新输入！');
+    }
   };
   const onRegister = (values) => {
-    message.error("没有注册权限！");
+    message.error('没有注册权限！');
     setMsg(loginMsg[0]);
   };
 
   const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
+    console.log('Failed:', errorInfo);
   };
   const ChangMsg = () => {
     if (msg.x === 0) {
@@ -50,7 +76,7 @@ const Login = () => {
     }
   };
   return (
-    <div className={style.login}>
+    <Wrapper>
       <div className="login_box">
         <div
           className="boxlog login_pre"
@@ -70,7 +96,7 @@ const Login = () => {
         <div className="boxlog  login_box_r">
           <h1>注册</h1>
           <Form
-            name="basic"
+            name="basic-register"
             labelCol={{
               span: 6,
             }}
@@ -92,7 +118,7 @@ const Login = () => {
               rules={[
                 {
                   required: true,
-                  message: "Please input your username!",
+                  message: 'Please input your username!',
                 },
               ]}
             >
@@ -106,7 +132,7 @@ const Login = () => {
               rules={[
                 {
                   required: true,
-                  message: "Please input your password!",
+                  message: 'Please input your password!',
                 },
               ]}
             >
@@ -116,23 +142,19 @@ const Login = () => {
             <Form.Item
               label="确认密码"
               name="repassword"
-              dependencies={["password"]}
+              dependencies={['password']}
               hasFeedback
               rules={[
                 {
                   required: true,
-                  message: "Please confirm your password!",
+                  message: 'Please confirm your password!',
                 },
                 ({ getFieldValue }) => ({
                   validator(_, value) {
-                    if (!value || getFieldValue("password") === value) {
+                    if (!value || getFieldValue('password') === value) {
                       return Promise.resolve();
                     }
-                    return Promise.reject(
-                      new Error(
-                        "The two passwords that you entered do not match!"
-                      )
-                    );
+                    return Promise.reject(new Error('The two passwords that you entered do not match!'));
                   },
                 }),
               ]}
@@ -145,11 +167,7 @@ const Login = () => {
                 span: 36,
               }}
             >
-              <Button
-                type="primary"
-                htmlType="submit"
-                style={{ width: "100%" }}
-              >
+              <Button type="primary" htmlType="submit" style={{ width: '100%' }}>
                 注册
               </Button>
             </Form.Item>
@@ -179,7 +197,7 @@ const Login = () => {
               rules={[
                 {
                   required: true,
-                  message: "Please input your username!",
+                  message: 'Please input your username!',
                 },
               ]}
             >
@@ -192,7 +210,7 @@ const Login = () => {
               rules={[
                 {
                   required: true,
-                  message: "Please input your password!",
+                  message: 'Please input your password!',
                 },
               ]}
             >
@@ -216,18 +234,14 @@ const Login = () => {
                 span: 36,
               }}
             >
-              <Button
-                type="primary"
-                htmlType="submit"
-                style={{ width: "100%" }}
-              >
+              <Button type="primary" htmlType="submit" style={{ width: '100%' }}>
                 登录
               </Button>
             </Form.Item>
           </Form>
         </div>
       </div>
-    </div>
+    </Wrapper>
   );
 };
 

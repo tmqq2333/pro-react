@@ -1,14 +1,15 @@
-import React from "react";
-import "./scss/notfound.scss";
-import { useNavigate, useLocation } from "react-router-dom";
+import React from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { Nofound } from './commpages.js';
 export default function NotFound() {
   const navigate = useNavigate();
   const backToHome = () => {
     navigate('/');
   };
-  const message="对不起，你没有权限你没有权限你没有权限你没有权限你没有权限你没有权限你没有权限你没有权限你没有权限你没有权限你没有权限你没有权限你没有权限你没有权限"
+  const message =
+    '对不起，你没有权限你没有权限你没有权限你没有权限你没有权限你没有权限你没有权限你没有权限你没有权限你没有权限你没有权限你没有权限你没有权限你没有权限';
   return (
-    <div style={{ background: "#f0f2f5", marginTop: "-20px", height: "100%" }}>
+    <Nofound>
       <div className="wscn-http404">
         <div className="pic-404"></div>
         <div className="bullshit">
@@ -19,6 +20,6 @@ export default function NotFound() {
           </a>
         </div>
       </div>
-    </div>
+    </Nofound>
   );
 }
